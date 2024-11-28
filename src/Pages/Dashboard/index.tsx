@@ -1,13 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 
 const Dashboard = () => {
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
-          setLoading(true);
           try {
             const response = await fetch('https://coreapi.hectorai.live/api/day-parting/heatmap-list', {
               method: 'POST',
@@ -21,12 +17,9 @@ const Dashboard = () => {
                 metrics: ['CPC', 'CR_perc', 'ROAS']
               })
             });
-            const jsonData = await response.json();
-            setData(jsonData);
+            const jsonData = await response.json();console.log(jsonData)
           } catch (error: any) {
-            setError(error.message);
           } finally {
-            setLoading(false);
           }
         };
         fetchData();
